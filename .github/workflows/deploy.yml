@@ -10,8 +10,9 @@ jobs:
     runs-on: ubuntu-latest                                                                       
     steps:
       - name: install ruby 
-        uses: apt install ruby-dev
+        run: | 
+          sudo apt-get -yqq install ruby-dev && apt-get install git
       - name: install dependencies for dpl
-        run: gem install dpl 
-      - name: launch unit test 
-        run:  dpl --provider=heroku --app=infinite-eyrie-56554 --api-key=${{secrets.API_KEY_HERO}}
+        run: sudo gem install dpl 
+      - name: deploy to heroku 
+        run:  sudo dpl --provider=heroku --app=infinite-eyrie-56554 --api-key=${{secrets.API_KEY_HERO}}
