@@ -11,4 +11,15 @@ jobs:
         run: composer install 
       - name: launch unit test 
         run:  bin/phpunit tests/Unit                                                                       
-      
+
+  test-func:                                                                                         
+    name: Test unitaire                                                                     
+    runs-on: ubuntu-latest                                                                       
+    steps:
+      - name: copy resources
+        uses: actions/checkout@v2
+      - name: install dependencies
+        run: composer install 
+      - name: launch integration test 
+        run:  bin/phpunit tests/Integration                                                                       
+        
