@@ -1,5 +1,6 @@
 name: A workflow for tests for my application
 on: [push] 
+
 jobs:                                                                                            
   test-unit:                                                                                         
     name: Test unitaire                                                                     
@@ -12,8 +13,8 @@ jobs:
       - name: launch unit test 
         run:  bin/phpunit tests/Unit                                                                       
 
-  test-func:                                                                                         
-    name: Test unitaire                                                                     
+  test-int:                                                                                         
+    name: Test integration                                                                    
     runs-on: ubuntu-latest                                                                       
     steps:
       - name: copy resources
@@ -22,4 +23,15 @@ jobs:
         run: composer install 
       - name: launch integration test 
         run:  bin/phpunit tests/Integration                                                                       
+        
+  test-func:                                                                                         
+    name: Test functionnal                                                                      
+    runs-on: ubuntu-latest                                                                       
+    steps:
+      - name: copy resources
+        uses: actions/checkout@v2
+      - name: install dependencies
+        run: composer install 
+      - name: launch functional test 
+        run:  php vendor/bin/behat
         
