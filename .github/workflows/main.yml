@@ -1,19 +1,37 @@
 name: A workflow for tests for my application
-on: push 
+on: [push] 
+
 jobs:                                                                                            
-    test-unit:                                                                                         
-        name: Test unitaire                                                                     
-        runs-on: ubuntu-latest                                                                       
-        steps:
-        - name: Validate composer.json and composer.lock
-        run: composer validate
-        - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest                                                                                
-        - name: Install git
-        run: apt-get update -yqq
-        run: apt-install git
-        - name: Install phpunit
-        run: curl --location --output /usr/local/bin/phpunit https://phar.phpunit.de/phpunit.phar 
-        run: chmod +x /usr/local/bin/phpunit
-        - name: launch unit tests
-        run: phpunit tests/Unit
+  test-unit:                                                                                         
+    name: Test unitaire                                                                     
+    runs-on: ubuntu-latest                                                                       
+    steps:
+      - name: copy resources
+        uses: actions/checkout@v2
+      - name: install dependencies
+        run: composer install 
+      - name: launch unit test 
+        run:  bin/phpunit tests/Unit                                                                       
+
+  test-int:                                                                                         
+    name: Test integration                                                                    
+    runs-on: ubuntu-latest                                                                       
+    steps:
+      - name: copy resources
+        uses: actions/checkout@v2
+      - name: install dependencies
+        run: composer install 
+      - name: launch integration test 
+        run:  bin/phpunit tests/Integration                                                                       
+        
+  test-func:                                                                                         
+    name: Test functionnal                                                                      
+    runs-on: ubuntu-latest                                                                       
+    steps:
+      - name: copy resources
+        uses: actions/checkout@v2
+      - name: install dependencies
+        run: composer install 
+      - name: launch functional test 
+        run:  php vendor/bin/behat
+        
