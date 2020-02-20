@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest                                                                       
     steps:
       - name: install ruby 
-        uses: apt install ruby-dev
+        run: | 
+        sudo apt-get -yqq install ruby-dev
       - name: install dependencies for dpl
         run: gem install dpl 
       - name: launch unit test 
