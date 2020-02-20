@@ -1,10 +1,10 @@
 name: A workflow for tests for my application
 on: push 
- jobs:                                                                                            
-     test-unit:                                                                                         
-      name: Test unitaire                                                                     
-      runs-on: ubuntu-latest                                                                       
-      steps:
+jobs:                                                                                            
+    test-unit:                                                                                         
+        name: Test unitaire                                                                     
+        runs-on: ubuntu-latest                                                                       
+        steps:
         - name: Validate composer.json and composer.lock
         run: composer validate
         - name: Install dependencies
